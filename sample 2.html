@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sacramento', cursive;
+            background: #ffaad4; /* Soft pink background */
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin: 20px 0;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+            animation: sparkle 1.5s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Button Styles */
+        .cta-button {
+            font-size: 1.5em;
+            padding: 15px 40px;
+            background-color: #ff4f81;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #ff2760;
+            transform: scale(1.05);
+        }
+
+        /* Moving No Button Styles */
+        .no-button {
+            font-size: 1.5em;
+            padding: 15px 40px;
+            background-color: #c2c2c2;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            position: absolute;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .no-button:hover {
+            background-color: #a5a5a5;
+        }
+
+        /* Animation for butterflies */
+        .butterfly {
+            position: absolute;
+            animation: fly 10s infinite ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            z-index: 5;
+        }
+
+        .butterfly img {
+            width: 60px;
+            height: 60px;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(200px, -100px) rotate(45deg);
+            }
+            50% {
+                transform: translate(0, -200px) rotate(90deg);
+            }
+            75% {
+                transform: translate(-200px, -100px) rotate(135deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(180deg);
+            }
+        }
+
+        /* Flower background animation */
+        .flower {
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+            animation: bloom 4s infinite ease-in-out;
+        }
+
+        @keyframes bloom {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .flower img {
+            width: 80px;
+            height: 80px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .cta-button, .no-button {
+                font-size: 1.2em;
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles"></div>
+    <div class="butterfly" style="animation-duration: 12s;">
+        <img src="https://cdn.pixabay.com/photo/2017/06/07/01/50/butterfly-2378777_960_720.png" alt="Butterfly">
+    </div>
+    <div class="butterfly" style="animation-duration: 8s;">
+        <img src="https://cdn.pixabay.com/photo/2016/09/19/19/01/butterfly-1683272_960_720.png" alt="Butterfly">
+    </div>
+    <div class="flower" style="left: 10%; animation-duration: 5s;">
+        <img src="https://cdn.pixabay.com/photo/2016/10/10/12/39/flower-1720279_960_720.png" alt="Flower">
+    </div>
+    <div class="flower" style="left: 25%; animation-duration: 6s;">
+        <img src="https://cdn.pixabay.com/photo/2017/07/24/14/26/flower-2532061_960_720.png" alt="Flower">
+    </div>
+    <div class="flower" style="left: 50%; animation-duration: 7s;">
+        <img src="https://cdn.pixabay.com/photo/2017/08/07/13/35/flower-2601097_960_720.png" alt="Flower">
+    </div>
+
+    <h1>Will You Be My Valentine?</h1>
+    <button class="cta-button" onclick="accept()">Yes, I will!</button>
+    <button class="no-button" onclick="moveNo()">No, Thanks!</button>
+
+    <script>
+        function accept() {
+            document.querySelector('h1').textContent = 'Yay! I’m So Happy! 💖';
+            document.querySelector('.cta-button').style.display = 'none';
+            document.querySelector('.no-button').style.display = 'none';
+        }
+
+        function moveNo() {
+            const noButton = document.querySelector('.no-button');
+            // Animate the "No" button by moving it away
+            noButton.style.transform = 'translateX(300px) rotate(45deg)';
+            noButton.style.opacity = '0'; // Fade it out
+
+            // After the animation completes, reset its position (optional)
+            setTimeout(() => {
+                noButton.style.transform = 'none';
+                noButton.style.opacity = '1';
+            }, 1000); // Reset after 1 second
+        }
+    </script>
+</body>
+</html>
